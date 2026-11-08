@@ -4,31 +4,10 @@ Displays Arduino sensor readings.
 
 Website: https://ryanw506.github.io/NAQAA./
 
-## Run the forecast service
+Open the website in desktop Chrome or Edge and connect the compatible Arduino over USB. Close Arduino Serial Monitor and other apps using the serial port. The humidity forecast runs locally in the browser; no Python service is needed. Keep the page open and allow about 65 seconds of continuous sensor readings for forecasts. Automatic control uses the device readings and forecast; the Stop blower button turns it off.
 
-1. Download the repository ZIP, extract it, and open the extracted folder in VS Code using **File > Open Folder**.
-2. Install Python, then open **Terminal > New Terminal** and run:
+To run the site from VS Code, download and extract the repository, select File > Open Folder, install Node.js and run `node preview.cjs` in the terminal. Open http://127.0.0.1:8771/.
 
-```powershell
-py -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe api.py
-```
+The included NaqaaCombined.ino targets a classic 16 MHz Nano, BME280 I2C, D9 PWM, and optional D2 tach feedback. Install Adafruit BME280 and its dependencies in Arduino IDE. RPM assumes two pulses per revolution. Altitude is approximate. Device data and calculations remain on the connected computer. Historical readings are stored locally in the browser.
 
-Keep this terminal open. The service listens only on this computer at http://127.0.0.1:8000. Restart it after replacing the model. Only load a model file you trust.
-
-## Open the dashboard
-
-Use the website link above in desktop Chrome or Edge. For local development, install Node.js, open a second terminal in the extracted folder, run `node preview.cjs`, and visit http://127.0.0.1:8771/.
-
-Connect the board using USB, close Arduino Serial Monitor and any other program using its port, and select 9600 baud. Temperature and humidity need about 65 seconds of uninterrupted readings for the forecast. The site and Python service must run on the computer connected to the board.
-
-## Arduino
-
-`NaqaaCombined.ino` targets a classic 16 MHz ATmega328P Nano with BME280 I2C, 25 kHz PWM on D9 and optional tachometer input on D2. Install Adafruit BME280 and its dependencies in Arduino IDE. Keep existing suitable motor-driver wiring; do not connect motor power to the Arduino pin. RPM assumes two tach pulses per revolution. Altitude is approximate, based on standard sea-level pressure.
-
-Automatic mode can request blower operation when the sensor and local forecast service are ready. The firmware requests stop on missing sensor data or command timeout; use the physical switch if needed. Forecasts are estimates and history is stored in the local browser. Data from a USB-connected device is not shared remotely.
-
-## Rights
-
-Copyright (c) 2026 ryanw506. All rights reserved. See LICENSE. Third-party notices remain in credits.html.
+Copyright (c) 2026 ryanw506. All rights reserved. See LICENSE and credits.html.
