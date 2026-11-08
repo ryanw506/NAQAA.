@@ -2,6 +2,7 @@
 (()=>{
 const by=id=>document.getElementById(id),tr=(en,ar)=>document.documentElement.lang==='ar'?ar:en;
 by('blower-panel').hidden=false;
+const gauge=document.createElement('div');gauge.className='duty-gauge';gauge.innerHTML='<div class="duty-gauge-inner"><span id="gauge-value">—</span><small id="gauge-label"></small></div>';by('blower-duty').parentElement.prepend(gauge);
 const modes=document.createElement('div');modes.className='auto-controls';modes.innerHTML='<label><input type="checkbox" id="auto-enable"><span id="auto-label"></span></label><span id="auto-policy"></span>';by('blower-controls').before(modes);
 const manual=document.createElement('details');manual.className='manual-controls';manual.innerHTML='<summary id="manual-label"></summary>';by('blower-controls').before(manual);manual.appendChild(by('blower-controls'));
 let armed=false,port=null,epoch=0,verified=false,telemetry=null,lastAck=0,lastSend=0,lastMatched=0,auto=false,desired=0,pending=false,policy=null,version=0,chain=Promise.resolve(),message='connect',autoSince=0;
@@ -11,7 +12,7 @@ function fresh(){return verified&&telemetry&&Date.now()-lastAck<3000}
 function paint(){const live=fresh(),usable=live&&telemetry.sensor_ok;
 by('manual-label').textContent=tr('Manual speed control','التحكم اليدوي بالسرعة');by('auto-label').textContent=tr('Automatic control','التحكم التلقائي');by('auto-enable').closest('.auto-controls').dataset.active=auto?'true':'false';by('auto-enable').checked=auto;by('auto-enable').disabled=!usable;
 by('auto-policy').textContent=armed?tr('Waiting for device and forecast model','بانتظار الجهاز ونموذج التوقع'):auto&&policy?policyNames[policy.data.mode][document.documentElement.lang==='ar'?1:0]:tr('Manual mode · automatic is off','الوضع اليدوي · التلقائي مطفأ');
-by('blower-duty').textContent=live?telemetry.applied+'%':'—';const rpm=live&&typeof telemetry.rpm==='number'?Math.round(telemetry.rpm):null;
+by('blower-duty').textContent=live?telemetry.applied+'%':'—';by('gauge-value').textContent=live?telemetry.applied+'%':'—';by('gauge-label').textContent=tr('APPLIED PWM','نسبة PWM المطبقة');gauge.style.setProperty('--duty',live?telemetry.applied:0);gauge.dataset.fresh=live?'true':'false';const rpm=live&&typeof telemetry.rpm==='number'?Math.round(telemetry.rpm):null;
 by('blower-rpm').textContent=rpm===null?'—':rpm.toLocaleString(document.documentElement.lang);by('blower-rpm-note').textContent=rpm===null?tr('No tach feedback available','لا توجد إشارة سرعة متاحة'):telemetry.applied>0&&rpm===0?tr('No rotation detected · check tach / blower','لم يُرصد دوران · تحقق من المنفاخ وإشارة السرعة'):tr('Tach feedback · assumes 2 pulses/revolution','إشارة Tach · بافتراض نبضتين لكل دورة');
 by('blower-state').textContent=!live?tr('Unconfirmed','غير مؤكد'):telemetry.applied>0?tr('Running','يعمل'):tr('Stopped','متوقف');by('blower-state').dataset.state=live&&telemetry.applied>0?'live':'disconnected';
 by('blower-controls').disabled=!usable||auto;by('blower-stop').disabled=!verified||!port;
