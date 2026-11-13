@@ -32,4 +32,16 @@ header #connect{font-size:12px;padding:10px 17px;white-space:nowrap}.header-acti
 
 /* NAQAA mark integrated into the original dark header. */
 .logo-brand{position:relative;display:block;width:156px;height:86px;padding:0;border:0;background:transparent;box-shadow:none;overflow:hidden;flex:none}.logo-brand img{position:absolute;inset:50% auto auto 50%;width:246px;height:auto;max-width:none;transform:translate(-50%,-50%);filter:drop-shadow(0 1px 1px #fff9)}footer .logo-brand{width:116px;height:64px}footer .logo-brand img{width:184px}@media(max-width:650px){.logo-brand{width:126px;height:70px}.logo-brand img{width:200px}}
-.logo-brand{background:radial-gradient(ellipse closest-side,#f6e6cbd9,transparent 100%)}
+.logo-brand{background:radial-gradient(ellipse closest-side,#f6e6cbd9,transparent 100%)}/* Warm monochrome mark on the dark surface, with no frame or glow. */
+.logo-brand{background:transparent}.logo-brand img{filter:brightness(0) saturate(100%) invert(81%) sepia(24%) saturate(742%) hue-rotate(331deg) brightness(101%) contrast(96%)}
+.logo-brand{background:transparent;overflow:visible}.logo-brand img{filter:none;mix-blend-mode:normal}.logo-brand:before{content:'';position:absolute;inset:7px 0;border-radius:50%;background:#f6e9d7;opacity:.95}footer .logo-brand:before{inset:6px 0}
+/* A light header surface keeps the original navy-and-orange logo legible. */
+header{background:#f4e8d9;border-radius:0 0 20px 20px;padding:12px 22px;border-bottom:0}header nav,header .state-badge{color:#304b5a}header #language{color:#173b55;background:#ffffff99;border-color:#264a5b44}.logo-brand:before{display:none}.logo-brand{overflow:hidden}.logo-brand img{filter:none;mix-blend-mode:normal}header nav a:hover{color:#a95f1e}
+/* Dark-header mark: original colored panel and dunes, light wordmark. */
+header{background:transparent;border-radius:0;padding:24px 0;border-bottom:1px solid #ead7b51a}header nav,header .state-badge{color:#c9bda9}header #language{color:#f6ecdb;background:#fff5df09;border-color:#ead7b52b}.logo-brand{position:relative;background:none;border:0;box-shadow:none;overflow:hidden}.logo-brand:before{display:none}.logo-brand img.logo-art{filter:none;mix-blend-mode:normal;clip-path:polygon(0 0,100% 0,100% 42%,0 42%,0 70%,100% 70%,100% 100%,0 100%)}.logo-brand .logo-wordmark{position:absolute;inset-inline:0;top:43%;text-align:center;font-family:'DM Sans',sans-serif;font-size:29px;line-height:1;font-weight:700;letter-spacing:-1.1px;color:#f4dfc0}.logo-brand img{top:50%}footer .logo-brand .logo-wordmark{font-size:22px}header nav a:hover{color:#ffe2b3}@media(max-width:650px){header{padding:16px 0}.logo-brand .logo-wordmark{font-size:23px}}
+/* Match the wordmark to the site's existing sand-gold accent. */
+.logo-brand .logo-wordmark{color:#e9bd81}
+.logo-brand .logo-wordmark{color:#083257}
+.logo-brand img{filter:none;clip-path:none;mix-blend-mode:normal}
+/* Keep the whole sun and dunes inside the logo viewport. */
+.logo-brand{height:112px}footer .logo-brand{height:84px}@media(max-width:650px){.logo-brand{height:92px}}
