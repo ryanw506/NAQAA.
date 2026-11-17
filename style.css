@@ -45,3 +45,40 @@ header{background:transparent;border-radius:0;padding:24px 0;border-bottom:1px s
 .logo-brand img{filter:none;clip-path:none;mix-blend-mode:normal}
 /* Keep the whole sun and dunes inside the logo viewport. */
 .logo-brand{height:112px}footer .logo-brand{height:84px}@media(max-width:650px){.logo-brand{height:92px}}
+
+/* Center the voltage card beneath the two readings on wider screens. */
+@media (min-width: 601px) {
+  .cards .card[data-sensor="2"] { grid-column: 1 / -1; width: calc((100% - 24px) / 2); justify-self: center; }
+}
+
+/* Exhibition dashboard: three balanced glass cards, with a circular reading. */
+.cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.cards .card[data-sensor="2"]{grid-column:auto;width:auto;justify-self:stretch}
+.card{position:relative;overflow:hidden;min-width:0;border-radius:26px;text-align:start;background:linear-gradient(145deg,rgba(77,59,41,.77),rgba(27,24,21,.94));border:1px solid rgba(239,204,148,.28);box-shadow:inset 0 1px rgba(255,242,220,.15),0 18px 48px rgba(0,0,0,.16);transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.card:hover{transform:translateY(-4px);border-color:#efbd7799;box-shadow:inset 0 1px #fff3,0 22px 54px #0005}
+.card:focus-visible{outline:2px solid #ffd293;outline-offset:4px}
+.card-visual{height:152px}.card-visual:after{background:linear-gradient(180deg,#1d18110a,#231d16c9 80%,#2b231cf2)}
+.card-content{position:relative;margin-top:-32px;padding:0 24px 21px}
+.card-heading{position:relative;display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:30px}
+.sensor-name{margin:0;font-size:12px;letter-spacing:1.2px;color:#f4dcba}.card-trend{font-size:11px;white-space:nowrap;color:#e6c89e}
+.reading-orbit{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:22px auto 19px;width:min(100%,190px);aspect-ratio:1;border-radius:50%;border:1px solid #efc58a73;background:radial-gradient(circle at 30% 23%,#fff4df16,transparent 48%),linear-gradient(145deg,#533c2a99,#1c1a18aa);box-shadow:inset 0 0 0 7px #fff4e807,inset 0 1px 12px #fff4e80a,0 10px 30px #0002}
+.reading-orbit:before{content:"";position:absolute;inset:9px;border:1px solid #f5d4a124;border-radius:50%;pointer-events:none}
+.card-value{position:relative;min-height:0;margin:0;line-height:1;white-space:nowrap;font-size:clamp(36px,3.8vw,53px);letter-spacing:-2px;font-variant-numeric:tabular-nums}.card-value small{margin-inline-start:4px;font-size:16px;letter-spacing:0;color:#e5bb80}
+.reading-caption{margin-top:12px;color:#c8b89e;font-size:9px;letter-spacing:1.15px;font-weight:600}
+.sparkline-caption{margin-top:0}.sparkline{height:48px;margin:8px 0 10px}.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:14px}.sensor-state{line-height:1.4}.details-link{white-space:nowrap}
+@media(max-width:900px) and (min-width:601px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.cards .card[data-sensor="2"]{grid-column:1/-1;width:calc((100% - 20px)/2);justify-self:center}}
+@media(max-width:600px){.cards{grid-template-columns:1fr;gap:16px}.cards .card[data-sensor="2"]{grid-column:auto;width:auto}.card-content{padding-inline:20px}.card-visual{height:135px}.reading-orbit{width:168px;margin:17px auto}.card-value{font-size:46px}}
+@media(prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
+
+@media(min-width:901px){.cards .card[data-sensor="0"]{order:0}.cards .card[data-sensor="2"]{order:1}.cards .card[data-sensor="1"]{order:2}}
+
+/* A clean rectangular reading surface for the exhibition dashboard. */
+.card{background:linear-gradient(145deg,rgba(65,48,35,.90),rgba(27,24,21,.96));border-color:#dfbd8c47}
+.card-visual{height:174px}.card-visual:after{background:linear-gradient(180deg,#21180c05 10%,#211a14aa 75%,#2e241cf5)}
+.card-content{margin-top:-34px;padding:0 24px 22px}
+.card-heading{min-height:32px}.sensor-name{font-size:13px;letter-spacing:1.15px}
+.reading-orbit{width:auto;aspect-ratio:auto;min-height:126px;margin:20px 0 23px;padding:20px 21px;display:flex;align-items:flex-start;justify-content:center;gap:9px;border-radius:16px;border:1px solid #e8c28a38;background:linear-gradient(125deg,#fff0d40d,#f3b56c09 60%,#fff0d402);box-shadow:inset 0 1px #fff2}
+.reading-orbit:before{display:none}.card-value{font-size:clamp(40px,4vw,57px);letter-spacing:-1.8px}.reading-caption{order:-1;margin:0;color:#c7b292;font-size:9px;letter-spacing:1.2px}
+.sparkline-caption{font-size:10px}.sparkline{height:50px}.card-bottom{border-top:1px solid #ead7b52b}
+.section-heading h1{letter-spacing:-1.7px}.forecast-panel,.blower-panel,.connection{box-shadow:inset 0 1px #fff2,0 18px 55px #0002}
+@media(max-width:600px){.card-visual{height:145px}.reading-orbit{min-height:108px;margin:16px 0 20px;padding:17px 19px}.card-value{font-size:48px}}

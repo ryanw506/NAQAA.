@@ -8,6 +8,6 @@ Open the website in desktop Chrome or Edge and connect the compatible Arduino ov
 
 To run the site from VS Code, download and extract the repository, select File > Open Folder, install Node.js and run `node preview.cjs` in the terminal. Open http://127.0.0.1:8771/.
 
-The included NaqaaCombined.ino targets a classic 16 MHz Nano, BME280 I2C, D9 PWM, and optional D2 tach feedback. Install Adafruit BME280 and its dependencies in Arduino IDE. RPM assumes two pulses per revolution. Altitude is approximate. Device data and calculations remain on the connected computer. Historical readings are stored locally in the browser.
+The included NaqaaCombined.ino targets a classic 16 MHz Nano, BME280 I2C, D9 PWM, D2 tach feedback, and a compatible 5:1 voltage sensor on A1. Install Adafruit BME280 and its dependencies in Arduino IDE. RPM assumes two pulses per revolution. Device data and calculations remain on the connected computer. Historical readings are stored locally in the browser.
 
 Copyright (c) 2026 ryanw506. All rights reserved. See LICENSE and credits.html.

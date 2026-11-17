@@ -13,6 +13,9 @@
 
 const byte BLOWER_PIN = 9;
 const byte TACH_PIN = 2;
+const byte VOLTAGE_PIN = A1; // Change to the actual connected analog pin if needed.
+const float ADC_REFERENCE_VOLTAGE = 5.0F; // Calibrate to Nano 5V measured with a multimeter.
+const float VOLTAGE_DIVIDER_RATIO = 5.0F; // For the tested 0-25V module.
 const bool PWM_HIGH_RUNS = true; // matches your latest working LOW=stop, HIGH=run setting
 const float PULSES_PER_REVOLUTION = 2.0; // verify against blower specification
 const uint16_t PWM_TOP = 639; // 16 MHz / 640 = 25 kHz
@@ -95,6 +98,7 @@ void setup() {
   TCCR1A = _BV(WGM11);
   TCCR1B = _BV(WGM13) | _BV(WGM12) | _BV(CS10);
   setBlowerPercent(0);
+  pinMode(VOLTAGE_PIN, INPUT);
   pinMode(TACH_PIN, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(TACH_PIN), countTachPulse, FALLING);
   Serial.begin(9600);
@@ -120,6 +124,9 @@ void loop() {
   unsigned long pulses;
   ATOMIC_BLOCK(ATOMIC_RESTORESTATE) { pulses = tachPulses; tachPulses = 0; }
   float rpm = pulses * 60000.0F / (PULSES_PER_REVOLUTION * elapsed);
+  unsigned long voltageTotal = 0;
+  for (byte i = 0; i < 20; i++) voltageTotal += analogRead(VOLTAGE_PIN);
+  float voltage = (voltageTotal / 20.0F) * ADC_REFERENCE_VOLTAGE * VOLTAGE_DIVIDER_RATIO / 1023.0F;
   float temperature = sensorFound ? bme.readTemperature() : NAN;
   float humidity = sensorFound ? bme.readHumidity() : NAN;
   float pressure = sensorFound ? bme.readPressure() / 100.0F : NAN;
@@ -134,6 +141,7 @@ void loop() {
   if (sensorOK) Serial.print(humidity, 2); else Serial.print(F("null"));
   Serial.print(F(",\"pressure\":")); if (isfinite(pressure) && pressure > 0) Serial.print(pressure, 2); else Serial.print(F("null"));
   Serial.print(F(",\"altitude\":")); if (isfinite(altitude)) Serial.print(altitude, 2); else Serial.print(F("null"));
+  Serial.print(F(",\"voltage\":")); Serial.print(voltage, 2);
   Serial.print(F(",\"rpm\":")); Serial.print(rpm, 0);
   Serial.print(F(",\"applied\":")); Serial.print(appliedPercent);
   Serial.print(F(",\"command_timeout\":"));
