@@ -82,3 +82,104 @@ header{background:transparent;border-radius:0;padding:24px 0;border-bottom:1px s
 .sparkline-caption{font-size:10px}.sparkline{height:50px}.card-bottom{border-top:1px solid #ead7b52b}
 .section-heading h1{letter-spacing:-1.7px}.forecast-panel,.blower-panel,.connection{box-shadow:inset 0 1px #fff2,0 18px 55px #0002}
 @media(max-width:600px){.card-visual{height:145px}.reading-orbit{min-height:108px;margin:16px 0 20px;padding:17px 19px}.card-value{font-size:48px}}
+
+.sparkline[hidden],.sparkline-caption[hidden]{display:none}
+
+/* Exhibition polish: compact measurements and clearer control hierarchy. */
+.section-heading{margin-bottom:26px}.section-heading h1{font-size:clamp(31px,3.4vw,46px);line-height:1.18}.section-heading .eyebrow{margin-bottom:14px}
+.card{--sensor-accent:#e8bc83;--sensor-tint:#f4be7210;border-radius:22px;background:linear-gradient(145deg,#49392bc9,#211e1bea);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+.card[data-sensor="1"]{--sensor-accent:#e8bc83;--sensor-tint:#f4be7210;border-color:#dfbd8c47}
+.card[data-sensor="2"]{--sensor-accent:#f1c579;--sensor-tint:#f1c57910}
+.card-visual{height:138px}.card-visual:after{background:linear-gradient(180deg,#241c1100 5%,#27201a99 65%,#2e261ef5)}
+.card-content{padding:0 22px 20px;margin-top:-32px}.sensor-name{color:var(--sensor-accent);font-size:12px;letter-spacing:1.25px}.card-trend{font-size:10px;color:#d5c5af}
+.reading-orbit{margin:18px 0 20px;min-height:118px;padding:18px 20px;border-radius:13px;border:0;border-inline-start:2px solid var(--sensor-accent);background:linear-gradient(115deg,var(--sensor-tint),#fff3db03);box-shadow:none;gap:13px}
+.card-value{font-size:clamp(39px,4vw,56px);font-weight:500;color:#fff5e5}.card-value small{font-size:17px;color:var(--sensor-accent)}.reading-caption{font-size:9px;color:#cfc0a9;letter-spacing:1.1px}
+.sparkline-caption{font-size:9px;color:#b9aa93}.sparkline-caption:before{background:var(--sensor-accent);width:4px;height:4px}.sparkline{margin-bottom:12px}.sensor-state{font-size:11px;color:#c0b199}.details-link{font-size:11px;display:inline-flex;align-items:center;padding:7px 10px;border:1px solid #eacb9b29;border-radius:8px;color:var(--sensor-accent);background:#ffebcb05}.card-bottom{padding-top:12px}
+.forecast-panel,.blower-panel,.connection{border-radius:24px;border-color:#ebc58d30;background:linear-gradient(130deg,#54412c99,#28221ccf);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px)}
+.forecast-panel{padding:28px}.forecast-values{gap:16px;margin:24px 0}.forecast-values>div{border-radius:15px;padding:21px;background:#1b191626;border-color:#ead4b328}.forecast-values strong{font-size:clamp(32px,4vw,50px)}
+.blower-panel{padding:28px}.auto-controls{padding:24px;border-radius:17px;border-color:#efbe7880;background:linear-gradient(125deg,#edaf5525,#fff4df06)}.auto-controls label{font-size:22px;gap:13px}.auto-controls span#auto-policy{font-size:14px;color:#e1cfb1}.manual-controls{background:#15120f19;border-color:#e8d5b42b;border-radius:12px}.manual-controls summary{padding:3px 0;color:#cbbca5}.blower-stop{border-radius:10px}.blower-rpm strong{font-variant-numeric:tabular-nums}
+#connect{box-shadow:0 4px 22px #e8a14420}.overview-meta .state-badge{padding:8px 12px;border:1px solid #ead7b529;border-radius:30px;background:#fff0d507}
+@media(max-width:600px){.section-heading h1{font-size:31px}.card-visual{height:130px}.reading-orbit{min-height:109px}.card-value{font-size:48px}.forecast-panel,.blower-panel{padding:21px}.auto-controls label{font-size:20px}.forecast-values>div{padding:18px}}
+
+/* History dialog: chart, then three aligned summary measurements. */
+dialog{width:min(980px,calc(100% - 32px));border-color:#e9c28b66;background:linear-gradient(135deg,#322a22fa,#211e1bfa)}
+.detail-banner{height:180px}.detail-banner-content{inset-inline:28px;bottom:20px}.detail-banner-content h2{font-size:28px}.detail-body{padding:22px 28px 26px}.history-header{gap:16px;margin-bottom:15px}.history-header h3{letter-spacing:1.5px;font-size:11px}.range-tabs{background:#17141040;border:1px solid #e4c89f26;padding:4px;border-radius:12px}.range-tabs button{border-radius:9px;padding:9px 14px}.range-tabs button[aria-pressed=true]{background:#e8b569;color:#261c12;box-shadow:0 2px 10px #0002}
+#chart{margin-bottom:18px}.stats{gap:12px}.stat{padding:19px 20px;border-radius:13px;background:#fff0d407;border-color:#e8c89b30}.stat span{font-size:12px;margin-bottom:10px}.stat strong{font-size:31px;font-weight:500;line-height:1.25;color:#fff1da}.stat small{font-size:13px}.history-footer{margin-top:18px;gap:12px;line-height:1.6}
+/* Applied PWM and measured RPM sit beside each other. */
+.blower-layout{grid-template-columns:minmax(330px,.95fr) minmax(260px,1.05fr);gap:32px}
+.blower-reading{display:grid;grid-template-columns:145px minmax(0,1fr);column-gap:22px;align-items:center}.duty-gauge{grid-column:1;grid-row:1;width:145px;margin:0 0 10px}.blower-reading>span{grid-column:1;grid-row:2;text-align:center;line-height:1.5;font-size:10px}.blower-rpm{grid-column:2;grid-row:1/3;border-top:0;border-inline-start:1px solid #ead7b52b;margin:0;padding:18px 0;padding-inline-start:22px;max-width:none;min-width:0}.blower-rpm>div{gap:7px;flex-wrap:wrap}.blower-rpm strong{font-size:clamp(32px,3.8vw,48px);line-height:1.1;color:#f0cf9b}.blower-rpm small{font-size:12px;letter-spacing:1px}.blower-rpm>span{display:block;margin-top:12px;font-size:10px;line-height:1.65}
+.blower-stop{border:1px solid #d88d6c99;background:#9e482b40;color:#ffe0ca;font-size:13px;font-weight:600;padding:13px 22px;box-shadow:inset 0 1px #ffddbd12}.blower-stop:hover:not(:disabled){background:#b65c3a70;border-color:#f0a582}.blower-stop:focus-visible{outline:2px solid #ffc698;outline-offset:4px}.blower-stop:disabled{opacity:.4;cursor:not-allowed}
+/* Presentation view enlarges the content and folds technical explanations. */
+.overview-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}.presentation-toggle{display:inline-flex;align-items:center;gap:8px;padding:9px 13px;border:1px solid #ebc68d50;border-radius:10px;background:#fff0d409;color:#ead6b5;font:inherit;font-size:11px;cursor:pointer}.presentation-toggle:before{content:'';width:12px;height:9px;border:1px solid currentColor;border-radius:2px;box-shadow:0 3px 0 -2px currentColor}.presentation-toggle:hover{background:#e6b9781c}.presentation-toggle[aria-pressed=true]{background:#e8b569;color:#291f14;border-color:#f1c780}.presentation-toggle:focus-visible{outline:2px solid #ffd293;outline-offset:3px}
+.presentation-view .section-heading{margin-top:20px}.presentation-view .section-heading h1{font-size:32px}.presentation-view .section-heading .eyebrow{display:none}.presentation-view .card-value{font-size:clamp(48px,4.7vw,68px)}.presentation-view .forecast-values strong{font-size:clamp(40px,4.6vw,64px)}.presentation-view #connection details,.presentation-view #connection .device-meta,.presentation-view .blower-note,.presentation-view footer{display:none}.presentation-view #forecast-error{display:block}.presentation-view .connection{padding:22px 28px}.presentation-view .connection .eyebrow{display:none}
+@media(max-width:900px){.blower-layout{grid-template-columns:1fr}.manual-controls{grid-column:auto}.blower-reading{max-width:440px}.overview-meta{gap:8px}.presentation-toggle{font-size:10px}}
+@media(max-width:600px){.detail-banner{height:140px}.detail-banner-content{inset-inline:20px}.detail-body{padding:18px 16px 22px}.detail-banner-content h2{font-size:24px}.history-header{gap:10px;flex-wrap:wrap}.range-tabs button{padding:8px 12px}.stat{padding:14px 10px}.stat strong{font-size:23px}.stat span{font-size:10px}.stat small{font-size:10px}.stats{gap:7px}.blower-reading{grid-template-columns:130px minmax(0,1fr);gap:10px 16px}.duty-gauge{width:130px}.blower-rpm{padding-inline-start:16px}.overview-meta{flex-direction:column;align-items:flex-end}.presentation-view .card-value{font-size:52px}.presentation-view .forecast-values strong{font-size:44px}}
+
+@media(max-width:600px){
+ header{flex-wrap:wrap;gap:12px}.header-actions{gap:8px;flex-wrap:wrap}#header-state{display:none}
+ .section-heading{flex-direction:column;gap:17px}.section-heading>div{min-width:0;max-width:100%}.overview-meta{width:100%;flex-direction:row;align-items:center;justify-content:space-between;text-align:start}
+ .connection-heading{flex-wrap:wrap;gap:12px}.forecast-panel,.blower-panel,.connection{min-width:0}.history-footer{flex-wrap:wrap}#chart svg{max-width:100%}
+}
+
+
+/* Fullscreen site showcase: all sections remain in a continuous vertical flow. */
+body.presentation-view{overflow:hidden}
+.presentation-view main{height:100dvh;display:flex;flex-direction:column;max-width:1600px}
+.presentation-view header{flex-shrink:0;margin:0 4%;padding:6px 0;min-height:76px}.presentation-view header nav{display:none}.presentation-view header .logo-brand{height:92px;width:132px}.presentation-view header .logo-brand img{width:200px}
+.presentation-view .dashboard{margin:0;padding:20px 4% 36px;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth;scroll-snap-type:y proximity;scroll-padding-top:20px;overscroll-behavior-y:contain;scrollbar-width:thin;scrollbar-color:#d7af7055 transparent;outline:none}
+.presentation-view .showcase-section{min-height:calc(100% - 20px);height:auto;box-sizing:border-box;scroll-snap-align:start;scroll-margin-top:0;margin:0 0 32px;padding:28px;overflow:visible}
+.presentation-view .showcase-section:last-child{margin-bottom:0}.presentation-view .presentation-overview{padding:12px 0 28px;display:flex;flex-direction:column;justify-content:center}
+.presentation-view .section-heading{margin-top:0;margin-bottom:25px}.presentation-view .section-heading h1{font-size:clamp(28px,3vw,42px)}.presentation-view .overview-meta{padding:0}
+.presentation-view .card-visual{height:clamp(100px,18vh,170px)}.presentation-view .reading-orbit{margin:15px 0;min-height:115px}.presentation-view .card-value{font-size:clamp(45px,5vw,70px)}
+.presentation-view .forecast-panel .eyebrow,.presentation-view .blower-panel .eyebrow{display:block}.presentation-view .forecast-values{margin:20px 0;gap:18px}.presentation-view .forecast-values>div{padding:18px 22px}.presentation-view .forecast-values strong{font-size:clamp(40px,4.5vw,64px)}.presentation-view .forecast-chart{height:clamp(170px,30vh,350px)}
+.presentation-view #forecast-error,.presentation-view #forecast-note,.presentation-view #blower-panel>.blower-note{display:block}.presentation-view #forecast-note,.presentation-view #blower-panel>.blower-note{max-width:950px}
+.presentation-view .blower-layout{margin:30px 0;grid-template-columns:minmax(330px,.9fr) minmax(300px,1.1fr)}.presentation-view .auto-controls{min-height:145px}.presentation-view #connection .eyebrow{display:block}.presentation-view #connection details,.presentation-view #connection .device-meta{display:none}
+.presentation-view .connection h2,.presentation-view .blower-panel h2,.presentation-view #forecast-title{font-size:30px}.presentation-view .connection .controls{margin-top:30px}.presentation-view .connection #connection-message{font-size:18px;line-height:1.7}
+@media(max-width:900px){.presentation-view .blower-layout{grid-template-columns:1fr}}
+@media(max-width:600px){.presentation-view .showcase-section{padding:22px 17px}.presentation-view .presentation-overview{padding:10px 0 24px}.presentation-view .section-heading h1{font-size:28px}.presentation-view .card-value{font-size:50px}.presentation-view .dashboard{scroll-snap-type:none}}
+@media(prefers-reduced-motion:reduce){.presentation-view .dashboard{scroll-behavior:auto;scroll-snap-type:none}}
+
+/* Keep device tools compact beneath the blower in showcase view. */
+.presentation-view .showcase-controls{padding:0;display:flex;flex-direction:column;gap:18px}
+.presentation-view .showcase-controls .blower-panel{margin:0;padding:26px 28px}
+.presentation-view .showcase-controls .connection{margin:0;padding:20px 28px;min-height:0}
+.presentation-view .showcase-controls .connection .eyebrow{display:none}
+.presentation-view .showcase-controls .connection h2{font-size:20px}
+.presentation-view .showcase-controls .connection .connection-heading{gap:12px}
+.presentation-view .showcase-controls .connection #connection-message{font-size:14px;line-height:1.6;margin:12px 0}
+.presentation-view .showcase-controls .connection .controls{margin-top:12px;gap:12px}
+@media(max-width:600px){.presentation-view .showcase-controls .blower-panel{padding:22px 17px}.presentation-view .showcase-controls .connection{padding:20px 17px}}
+
+/* Humidity forecast: a compact measurement strip above the main plot. */
+.forecast-panel{padding:28px;border-radius:24px}
+.forecast-values,.presentation-view .forecast-values{gap:0;margin:25px 0 18px;padding:4px 0 8px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.forecast-values>div,.presentation-view .forecast-values>div{position:relative;border:0;border-radius:0;background:none;padding:8px 26px;gap:13px;min-width:0}
+.forecast-values>div:first-child{padding-inline-start:0}.forecast-values>div+div{border-inline-start:1px solid #e5c28f32}
+.forecast-values span{font-size:13px;color:#d8c9b2}.forecast-values strong,.presentation-view .forecast-values strong{font-size:clamp(36px,4vw,58px);font-weight:500;letter-spacing:-1.7px}
+#forecast-current{color:#a9d7bf}#forecast-short{color:#efb363}#forecast-value{color:#9cdaeb}
+.forecast-values small{font-size:11px;color:#ad9e88;min-height:17px}
+#forecast-message{font-size:12px;margin:5px 0 21px;min-height:0;color:#c8b79b;line-height:1.7}
+.forecast-plot{border:1px solid #ead7b523;border-radius:17px;padding:20px 20px 12px;background:linear-gradient(145deg,#201c182d,#15141133)}
+.forecast-plot-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.forecast-plot-heading h3{font-size:13px;font-weight:500;margin:0;color:#efddc1}.forecast-legend{font-size:11px;margin:0;gap:19px}.forecast-legend span:before{width:15px;height:2px}
+.forecast-chart,.presentation-view .forecast-chart{height:280px;margin-top:20px}.forecast-panel[data-has-history=false] .forecast-chart{height:115px;margin-top:8px}
+.forecast-empty{height:100%;display:flex;align-items:center;justify-content:center;gap:15px;color:#b8a88e;text-align:start}.forecast-empty-mark{display:grid;place-items:center;width:36px;height:36px;border:1px solid #e4c59433;border-radius:10px;color:#d9b77f;font-size:22px;font-weight:300}.forecast-empty strong{display:block;font-size:13px;font-weight:500;color:#d4c3a7;margin-bottom:7px}.forecast-empty span:not(.forecast-empty-mark){font-size:11px}
+.forecast-footer{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:17px}#forecast-error{font-size:11px;color:#bead93;margin:3px 0;line-height:1.7}.forecast-details{font-size:11px;color:#cbb79a;max-width:520px}.forecast-details summary{cursor:pointer;padding:3px 0;list-style-position:inside}.forecast-details summary:hover{color:#f0c88c}#forecast-note{font-size:11px;line-height:1.8;color:#b7a88e;margin:10px 0 0}
+.presentation-view .forecast-panel{min-height:0;padding:28px;margin-bottom:32px}.presentation-view .forecast-chart{height:clamp(240px,34vh,390px)}.presentation-view .forecast-panel[data-has-history=false] .forecast-chart{height:115px}.presentation-view .forecast-details{display:block}.presentation-view .forecast-plot{padding:23px 23px 14px}
+@media(max-width:650px){.forecast-panel,.presentation-view .forecast-panel{padding:22px 17px}.forecast-values>div,.presentation-view .forecast-values>div{padding:7px 11px;gap:12px}.forecast-values span{font-size:11px}.forecast-values strong,.presentation-view .forecast-values strong{font-size:clamp(25px,6.4vw,38px);letter-spacing:-1px}.forecast-values small{font-size:9px;line-height:1.5;min-height:26px;overflow-wrap:anywhere}.forecast-plot,.presentation-view .forecast-plot{padding:16px 11px 9px}.forecast-plot-heading{gap:14px}.forecast-legend{gap:12px;font-size:10px}.forecast-chart,.presentation-view .forecast-chart{height:220px}.forecast-footer{gap:8px}.forecast-empty{gap:10px}.forecast-empty strong{font-size:12px}.forecast-empty span:not(.forecast-empty-mark){font-size:10px}}
+
+/* Restore NAQAA's translucent glass surfaces and forecast rectangles. */
+:root{--glass-border:rgba(244,216,171,.30);--glass-shine:rgba(255,245,226,.22)}
+.card{background:linear-gradient(135deg,rgba(244,221,185,.13),rgba(47,37,28,.37) 58%,rgba(24,23,21,.58));border-color:var(--glass-border);backdrop-filter:blur(24px) saturate(125%);-webkit-backdrop-filter:blur(24px) saturate(125%);box-shadow:inset 0 1px 0 var(--glass-shine),inset 1px 0 0 #fff5e70b,0 16px 44px #0003}
+.card[data-sensor="1"],.card[data-sensor="2"]{border-color:var(--glass-border)}
+.reading-orbit{border:1px solid #f0d4a842;border-inline-start:1px solid #f0d4a842;border-radius:16px;background:linear-gradient(125deg,#ffefd319,#e6c6980a 65%,#fff4dc08);box-shadow:inset 0 1px 0 #fff4da22,inset 0 -1px 0 #d8bb8e0a;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.forecast-panel,.blower-panel,.connection{background:linear-gradient(125deg,rgba(244,224,193,.13),rgba(112,76,36,.22) 58%,rgba(35,29,24,.43));border:1px solid var(--glass-border);box-shadow:inset 0 1px 0 var(--glass-shine),inset 1px 0 0 #fff4da0b,0 20px 60px #0003;backdrop-filter:blur(30px) saturate(130%);-webkit-backdrop-filter:blur(30px) saturate(130%)}
+.forecast-values,.presentation-view .forecast-values{gap:20px;margin:26px 0 23px;padding:0}
+.forecast-values>div,.presentation-view .forecast-values>div{border:1px solid #f0d4a83d;border-inline-start:1px solid #f0d4a83d;border-radius:18px;padding:23px 24px;min-height:148px;gap:15px;background:linear-gradient(125deg,#fff0d615,#d7b78808)!important;box-shadow:inset 0 1px 0 #fff4dc24,0 8px 22px #0000000d;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.forecast-values>div:first-child{padding-inline-start:24px}.forecast-values>div+div{border-inline-start:1px solid #f0d4a83d}
+.forecast-plot{background:linear-gradient(145deg,#fff0da0b,#1a18152b);border-color:#edd0a138;box-shadow:inset 0 1px #fff3dc12}
+.auto-controls{background:linear-gradient(125deg,#f3c78326,#fff0d60e);border-color:#f0cc9270;box-shadow:inset 0 1px #fff4dc40,0 10px 30px #00000012;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.auto-controls[data-active=true]{background:linear-gradient(125deg,#efb36332,#fff0d612);box-shadow:inset 0 1px #fff4dc55,0 0 25px #eab66c15}
+.manual-controls{background:linear-gradient(130deg,#fff0d60a,#1715110c);border-color:#edd0a138;box-shadow:inset 0 1px #fff4dc15}
+dialog{background:linear-gradient(135deg,rgba(75,61,45,.77),rgba(31,28,24,.87));border-color:#e9c28b66;backdrop-filter:blur(35px) saturate(130%);-webkit-backdrop-filter:blur(35px) saturate(130%);box-shadow:inset 0 1px #fff4da35,0 30px 110px #0008}
+.stat{background:linear-gradient(120deg,#fff0d616,#fff0d606);border-color:#f0d4a83d;box-shadow:inset 0 1px #fff4dc20;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+@media(max-width:650px){.forecast-values,.presentation-view .forecast-values{gap:12px;grid-template-columns:1fr}.forecast-values>div,.presentation-view .forecast-values>div{padding:19px 21px;min-height:125px}.forecast-values>div:first-child{padding-inline-start:21px}.forecast-values strong,.presentation-view .forecast-values strong{font-size:42px}.forecast-values span{font-size:13px}.forecast-values small{font-size:11px;min-height:0}}
