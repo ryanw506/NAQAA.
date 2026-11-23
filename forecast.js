@@ -4,7 +4,11 @@ const panel=document.createElement('section');panel.className='glass forecast-pa
 panel.innerHTML='<div class="connection-heading"><div><p class="eyebrow" id="forecast-eyebrow"></p><h2 id="forecast-title"></h2></div><span class="state-badge" id="forecast-state"></span></div><div class="forecast-values"><div><span id="forecast-current-label"></span><strong id="forecast-current">—</strong></div><div class="forecast-prediction short"><span id="forecast-short-label"></span><strong id="forecast-short">—</strong><small id="forecast-short-time"></small></div><div class="forecast-prediction"><span id="forecast-next-label"></span><strong id="forecast-value">—</strong><small id="forecast-long-time"></small></div></div><p id="forecast-message" role="status" aria-live="polite"></p><div class="forecast-plot"><div class="forecast-plot-heading"><h3 id="forecast-chart-title"></h3><div class="forecast-legend" id="forecast-legend"></div></div><div id="forecast-chart" class="forecast-chart"></div></div><div class="forecast-footer"><p id="forecast-error"></p><details class="forecast-details"><summary id="forecast-details-label"></summary><p id="forecast-note"></p></details></div>';
 document.getElementById('blower-panel').before(panel);
 const el=id=>document.getElementById(id),tr=(en,ar)=>document.documentElement.lang==='ar'?ar:en;
-const modelPromise=fetch('model-parameters.json?v=1').then(r=>{if(!r.ok)throw Error('Model unavailable');return r.json()});
+let modelPromise=null;
+function loadModel(){
+ if(!modelPromise)modelPromise=fetch('model-parameters.json?v=1').then(r=>{if(!r.ok)throw Error('Model unavailable');return r.json()}).catch(error=>{modelPromise=null;throw error});
+ return modelPromise;
+}
 let rows=[],observations=[],predictions=[],temp=null,humidity=null,epoch=0,lastPosted=0,inflight=false,result=null,mode='disconnected',controller=null,generation=0;
 const time=s=>new Date(s*1000).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit',hour12:true});
 function unavailable(){window.dispatchEvent(new CustomEvent('naqaa-forecast-unavailable'))}
@@ -46,7 +50,7 @@ async function tick(){
 if(!connection.running){if(epoch||rows.length){reset();epoch=0}mode='disconnected';paint();return}if(epoch!==openedAt){reset(true);epoch=openedAt}
 const last=rows.at(-1);if(!last){paint();return}if(Date.now()/1000-last.timestamp>3){reset();mode='stale';paint();return}paint();if(inflight||last.timestamp<=lastPosted)return;
 inflight=true;lastPosted=last.timestamp;const version=generation,session=epoch;controller=new AbortController();const ownController=controller,timeout=setTimeout(()=>ownController.abort(),2500);
-try{const bundle=await modelPromise;const data=NaqaaModel.forecast(rows,bundle);if(version!==generation||!connection.running)return;
+try{const bundle=await loadModel();const data=NaqaaModel.forecast(rows,bundle);if(version!==generation||!connection.running)return;
 if(!NaqaaControl.decision(data)||data.source_timestamp!==last.timestamp||data.status==='ready'&&![data.target_10s,data.target_60s].every(Number.isFinite))throw Error('API v2 required');
 result=data;mode=data.status;if(data.status==='ready'&&predictions.at(-1)?.source_timestamp!==data.source_timestamp)predictions.push({...data});window.dispatchEvent(new CustomEvent('naqaa-forecast',{detail:{session,data}}));
 }catch{if(version===generation){result=null;mode='offline';unavailable()}}finally{clearTimeout(timeout);inflight=false;paint()}}
