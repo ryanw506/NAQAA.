@@ -183,3 +183,7 @@ body.presentation-view{overflow:hidden}
 dialog{background:linear-gradient(135deg,rgba(75,61,45,.77),rgba(31,28,24,.87));border-color:#e9c28b66;backdrop-filter:blur(35px) saturate(130%);-webkit-backdrop-filter:blur(35px) saturate(130%);box-shadow:inset 0 1px #fff4da35,0 30px 110px #0008}
 .stat{background:linear-gradient(120deg,#fff0d616,#fff0d606);border-color:#f0d4a83d;box-shadow:inset 0 1px #fff4dc20;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 @media(max-width:650px){.forecast-values,.presentation-view .forecast-values{gap:12px;grid-template-columns:1fr}.forecast-values>div,.presentation-view .forecast-values>div{padding:19px 21px;min-height:125px}.forecast-values>div:first-child{padding-inline-start:21px}.forecast-values strong,.presentation-view .forecast-values strong{font-size:42px}.forecast-values span{font-size:13px}.forecast-values small{font-size:11px;min-height:0}}
+.video-resource{padding:12px 0 24px;text-align:center;font-size:12px;color:var(--muted)}
+.video-resource a{display:inline-block;padding:10px 16px;border:1px solid var(--line);border-radius:10px;background:#fff3dc08}
+.video-resource a:hover{color:var(--cream);border-color:var(--amber)}
+.presentation-view .video-resource{min-height:0;margin:0;padding:4px 0 24px;scroll-snap-align:end}

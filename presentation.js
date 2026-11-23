@@ -9,6 +9,12 @@
  blower.before(controls);controls.append(blower,connection);
  const sections=[overview,document.getElementById('forecast-panel'),controls];
  sections.forEach(section=>section.classList.add('showcase-section'));
+ const video=document.createElement('div');video.className='video-resource';
+ const videoLink=document.createElement('a');
+ videoLink.href='https://youtu.be/mZ1OZCOTwSU';videoLink.target='_blank';videoLink.rel='noopener noreferrer';
+ videoLink.dataset.en='EDS explained on YouTube ↗';videoLink.dataset.ar='شرح EDS على YouTube ↗';
+ videoLink.textContent=videoLink.dataset[document.documentElement.lang==='ar'?'ar':'en'];
+ video.appendChild(videoLink);dashboard.appendChild(video);
  let active=false,entering=false,ownedFullscreen=false,previousFocus=null,previousScroll=0;
  async function enter(){
   if(active||entering)return;
