@@ -27,7 +27,7 @@ const uint16_t PWM_TOP = 639; // 25 kHz
 
 const unsigned long COMMAND_TIMEOUT_MS = 6000UL;
 const unsigned long SAMPLE_MS = 1000UL;
-const unsigned long AUTO_DELAY_MS = 90000UL; // إضافة: مدة الانتظار 90 ثانية (دقيقة ونصف)
+const unsigned long AUTO_DELAY_MS = 10000UL; // إضافة: مدة الانتظار 10 ثوانٍ
 
 Adafruit_BME280 bme;
 
@@ -263,7 +263,7 @@ void loop() {
 
   // ---------------------------------------------------------
   // شرط الجهد مستقل عن الرطوبة. يفعّله الموقع بأوامر V أثناء الوضع التلقائي.
-  if (voltageControlEnabled && sensorOK && isfinite(voltage) && voltage <= 5.0) {
+  if (voltageControlEnabled && sensorOK && isfinite(voltage) && voltage <= 7.0) {
     if (!autoConditionActive) {
       autoConditionActive = true;
       autoConditionStartTime = now; // يبدأ يحسب الوقت
@@ -271,7 +271,7 @@ void loop() {
       voltageAutoRunning = true;
     }
   } else {
-    autoConditionActive = false; // يصفر العداد إذا تجاوز الجهد 5 فولت أو توقف التلقائي
+    autoConditionActive = false; // يصفر العداد إذا تجاوز الجهد 7 فولت أو توقف التلقائي
     voltageAutoRunning = false;
   }
   if (sensorOK && now - lastCommand < COMMAND_TIMEOUT_MS) {
@@ -313,7 +313,7 @@ void loop() {
   Serial.print(F(",\"voltage\":"));
   Serial.print(voltage, 2);
 
-  Serial.print(F(",\"voltage_rule\":1,\"voltage_limit\":5,\"voltage_auto\":"));
+  Serial.print(F(",\"voltage_rule\":1,\"voltage_limit\":7,\"voltage_auto\":"));
   Serial.print(voltageAutoRunning ? F("true") : F("false"));
   Serial.print(F(",\"voltage_wait_seconds\":"));
   Serial.print(autoConditionActive
