@@ -263,7 +263,7 @@ void loop() {
 
   // ---------------------------------------------------------
   // شرط الجهد مستقل عن الرطوبة. يفعّله الموقع بأوامر V أثناء الوضع التلقائي.
-  if (voltageControlEnabled && sensorOK && isfinite(voltage) && voltage <= 10.0) {
+  if (voltageControlEnabled && sensorOK && isfinite(voltage) && voltage <= 5.0) {
     if (!autoConditionActive) {
       autoConditionActive = true;
       autoConditionStartTime = now; // يبدأ يحسب الوقت
@@ -271,7 +271,7 @@ void loop() {
       voltageAutoRunning = true;
     }
   } else {
-    autoConditionActive = false; // يصفر العداد إذا تجاوز الجهد 10 فولت أو توقف التلقائي
+    autoConditionActive = false; // يصفر العداد إذا تجاوز الجهد 5 فولت أو توقف التلقائي
     voltageAutoRunning = false;
   }
   if (sensorOK && now - lastCommand < COMMAND_TIMEOUT_MS) {
@@ -313,7 +313,7 @@ void loop() {
   Serial.print(F(",\"voltage\":"));
   Serial.print(voltage, 2);
 
-  Serial.print(F(",\"voltage_rule\":1,\"voltage_auto\":"));
+  Serial.print(F(",\"voltage_rule\":1,\"voltage_limit\":5,\"voltage_auto\":"));
   Serial.print(voltageAutoRunning ? F("true") : F("false"));
   Serial.print(F(",\"voltage_wait_seconds\":"));
   Serial.print(autoConditionActive
